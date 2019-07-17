@@ -43,7 +43,7 @@
         methods: {
             async create() {
                 await  this.$axios.$post('topics', this.form)
-                this.$router.push('/')
+                this.$router.push('/topics')
             }
         }
     }

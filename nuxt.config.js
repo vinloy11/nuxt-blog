@@ -81,7 +81,9 @@ export default {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: "http://127.0.0.1:8000/api"
+    // baseURL: "https://free80187.cpsite.ru/api"
+    baseURL: "http://localhost:8000/api"
+
   },
 
   auth: {
