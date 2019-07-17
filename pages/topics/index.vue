@@ -2,7 +2,7 @@
     <div class="container">
         <h1>Latest topics</h1>
         <div v-for="(topic, index) in topics" :key="index" class="bg-light mt-5 mb-5" style="padding: 20px">
-            <h2>{{ topic.title }}</h2>
+            <h2><nuxt-link style="text-decoration: none;" class="link" :to="{name: 'topics-id', params: {id: topic.id} }" >{{ topic.title }}</nuxt-link></h2>
             <p class="text-muted" style="font-size: 12px">{{ topic.created_at }} by {{ topic.user.name }}</p>
 
             <div v-for="(content, index) in topic.posts" :key="index" class="ml-5 content">
@@ -53,5 +53,11 @@
     .content {
         border-left: 10px solid white;
         padding: 0 10px 0 10px;
+    }
+    .link {
+        color: black;
+        &:hover {
+            color: slategray;
+        }
     }
 </style>
