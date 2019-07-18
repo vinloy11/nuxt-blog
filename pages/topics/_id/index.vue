@@ -15,8 +15,14 @@
         <div class="mt-5 ml-5 mr-5 mb-5" v-if="authenticated">
             <form @submit.prevent="create($route.params.id)">
                 <div class="form-group">
-                    <label>Add a new post</label>
-                    <input v-model="body" type="text" class="form-control" placeholder="Write something...">
+                    <h4>Add a new post:</h4>
+                    <textarea
+                            v-model="body"
+                            class="form-control"
+                            rows="5"
+                            placeholder="Write something..."
+                    ></textarea>
+                    <!---->
                     <small v-if="errors.body" class="form-text text-danger">
                         {{ errors.body[0] }}
                     </small>
@@ -37,7 +43,8 @@
         data() {
             return {
                 topic: '',
-                body: ''
+                body: '',
+                // value: '',
             }
         },
         async asyncData({$axios, params}) {
@@ -52,6 +59,7 @@
                     body: this.body
                 })
                 let {data} = await this.$axios.$get(`/topics/${id}`)
+                this.body = ''
                 return this.topic = {...this.topic, ...data}
             },
             goBack() {
