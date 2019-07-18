@@ -4,6 +4,7 @@
         <div class="bg-light mt-5 mb-5" style="padding: 20px">
             <h2 class="display-3">{{ topic.title }}</h2>
             <hr>
+
             <p class="text-muted" style="font-size: 12px">{{ topic.created_at }} by {{ topic.user.name }}</p>
 
             <div v-for="(content, index) in topic.posts" :key="index" class="ml-5 content">
