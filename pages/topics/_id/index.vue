@@ -12,6 +12,20 @@
                 <p class="text-muted" style="font-size: 10px">{{ content.created_at }} by {{ content.user.name }}</p>
             </div>
         </div>
+        <div class="mt-5 ml-5 mr-5 mb-5" v-if="authenticated">
+            <form @submit.prevent="create($route.params.id)">
+                <div class="form-group">
+                    <label>Add a new post</label>
+                    <input v-model="body" type="text" class="form-control" placeholder="Write something...">
+                    <small v-if="errors.body" class="form-text text-danger">
+                        {{ errors.body[0] }}
+                    </small>
+                </div>
+                <button class="btn btn-outline-primary">
+                    Add a new post
+                </button>
+            </form>
+        </div>
         <!--<nuxt-link @click="goBack" to="" class="link text-success">Back</nuxt-link>-->
         <a @click="goBack" class="link text-success">Back</a>
         <!--<nuxt-link to="/posts">prev</nuxt-link>-->
@@ -22,7 +36,8 @@
     export default {
         data() {
             return {
-                topic: ''
+                topic: '',
+                body: ''
             }
         },
         async asyncData({$axios, params}) {
@@ -32,6 +47,13 @@
             }
         },
         methods: {
+            async create(id) {
+                await this.$axios.$post(`/topics/${this.$route.params.id}/posts`, {
+                    body: this.body
+                })
+                let {data} = await this.$axios.$get(`/topics/${id}`)
+                return this.topic = {...this.topic, ...data}
+            },
             goBack() {
                 return this.$router.go(-1)
             }
